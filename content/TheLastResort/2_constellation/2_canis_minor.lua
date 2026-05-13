@@ -7,6 +7,7 @@ SMODS.Consumable{
     pos = {x=0, y=3},
     config = {
         tiers = {2, 3, 3, 4},
+        copies = 2
     },
     loc_vars = function (self, info_queue, card)
 
@@ -45,16 +46,20 @@ SMODS.Consumable{
                     }
                 }
             }
-            }
+            },
+            vars = {card.ability.tier == 4 and (card.ability.copies or G.P_CENTERS[card.config.center.key].config.copies)}
         }
     end,
     can_use = function(self,card)
         return G.GAME.worm_tlr_last_const_used ~= self.key and G.GAME.worm_tlr_last_const_used ~= nil
     end,
     use = function(self,card,area,copier)
-        local newcard = SMODS.add_card({key = G.GAME.worm_tlr_last_const_used})
-        if card.ability.tier >= 3 then newcard:set_edition("e_negative") end
-        newcard.ability.tier = math.max(G.GAME.worm_tlr_last_const_used_tier, card.ability.tiers[card.ability.tier])
-        WORM_TLR.update_const_sprite(newcard.config.center, newcard)
+        local copies = (card.ability.tier == 4 and (card.ability.copies or G.P_CENTERS[card.config.center.key].config.copies)) or 1
+        for i = 1, copies do
+            local newcard = SMODS.add_card({key = G.GAME.worm_tlr_last_const_used})
+            if card.ability.tier >= 3 then newcard:set_edition("e_negative") end
+            newcard.ability.tier = math.max(G.GAME.worm_tlr_last_const_used_tier, card.ability.tiers[card.ability.tier])
+            WORM_TLR.update_const_sprite(newcard.config.center, newcard)
+        end
     end
 }

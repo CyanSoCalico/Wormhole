@@ -239,7 +239,7 @@ local CONSTELLATIONS = {
 			"Creates the last",
 			"{V:1}Constellation{} card",
 			"used during this run as",
-			"2 {C:dark_edition}Negative{} {V:1}Shining Constellations",
+			"#1# {C:dark_edition}Negative{} {V:1}Shining Constellations",
 			"{C:inactive,s:0.8}({V:1,s:0.8}Canis Minor {C:inactive,s:0.8}excluded)"
 		}
 	},
