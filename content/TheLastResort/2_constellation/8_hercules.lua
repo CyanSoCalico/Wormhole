@@ -31,9 +31,7 @@ SMODS.Consumable{
 			end
 		end
 		card.ability.blind = pseudorandom_element(choices, "tlr_const_hercules")
-		if card and card.juice_up and type(card.juice_up) == "function" then
-			card:juice_up()
-		end
+		card:juice_up()
 	end,
 	set_ability = function (self, card, initial, delay_sprites)
 		if card.ability.tier == 4 then
